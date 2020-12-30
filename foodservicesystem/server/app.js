@@ -8,21 +8,29 @@ const router=new Router()
 
 router.get('/api/test1',async(ctx)=>{
   ctx.body={
-    msg:'hello koa'
+    msg:'hello koa',
+    a:ctx.query.m
   }
 })
+// 允许跨域访问
+app.use(cors({
+  origin: function (ctx) {
+     // return "*"; // 允许来自所有域名请求
+     // 允许多个跨域
+     var allowCors = ['http://localhost:8080',  'http://localhost:8081']
+      
+     return allowCors.includes(ctx.header.origin)?ctx.header.origin:''
+  },
+  exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
+  maxAge: 5,
+  credentials: true,
+  allowMethods: ['GET', 'POST', 'DELETE'],
+  allowHeaders: ['Content-Type', 'Authorization', 'Accept']
+}))
 
 // 配置路由
 app.use(router.routes(),router.allowedMethods())
 
-// 允许跨域访问
-app.use(cors({
-  exposeHeaders: ['WWW-Authenticate', 'Server-Authorization', 'Date'],
-  maxAge: 100,
-  credentials: true,
-  allowMethods: ['GET', 'POST', 'OPTIONS'],
-  allowHeaders: ['Content-Type', 'Authorization', 'Accept', 'X-Custom-Header', 'anonymous'],
-}));
 // 设置端口号
 const port= 5000
 

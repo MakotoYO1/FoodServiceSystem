@@ -4,7 +4,7 @@ import {Message} from 'element-ui'
 
 const service=axios.create({
   timeout:20000,
-  baseURL:'localhost:5000',
+  baseURL:'http://localhost:5000/',
   // get请求参数序列化
   paramsSerializer:function(params) {
     return qs.stringify(params,{arrayFormat:'repeat'})
@@ -30,6 +30,15 @@ service.interceptors.response.use(
     return Promise.resolve(response)
   },
   error => {
+    if(!error.response){
+      // 请求超时状态
+      if (error.message.includes('timeout')) {
+        Message.error('请求超时，请检查网络是否连接正常')
+      } else {
+        Message.error('请求失败，请检查网络是否已连接')
+      }
+      return
+    }
     return Promise.reject(error)
   }
 )
