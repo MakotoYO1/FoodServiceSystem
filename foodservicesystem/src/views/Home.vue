@@ -18,10 +18,17 @@ export default {
     HelloWorld
   },
   async created(){
-    let res=await test.test1()
+    let res=await test.add({
+      name:'abc',
+      sex:'男',
+      phone:'15252803267',
+      birthday:'2020-05-27'
+    })
     if(res.status===200){
       console.log(res.data.msg)
     }
+    // let res1=await test.search()
+    // console.log(res1)
   }
 }
 </script>

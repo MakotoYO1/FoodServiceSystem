@@ -4,7 +4,7 @@ import {Message} from 'element-ui'
 
 const service=axios.create({
   timeout:20000,
-  baseURL:'http://localhost:5000/',
+  baseURL:'http://localhost:5000/api/',
   // get请求参数序列化
   paramsSerializer:function(params) {
     return qs.stringify(params,{arrayFormat:'repeat'})
@@ -38,6 +38,18 @@ service.interceptors.response.use(
         Message.error('请求失败，请检查网络是否已连接')
       }
       return
+    }
+    const responseCode=error.response.status
+    switch(responseCode.toString()[0]){
+      case '4':
+        Message.error('客户端请求异常')
+        break
+      case '5':
+        Message.error('服务器异常')
+        break
+      // 其他错误，直接抛出错误提示
+      default:
+        Message.error(error.response.data.message)
     }
     return Promise.reject(error)
   }

@@ -2,16 +2,17 @@ const Koa=require('koa')
 const Router=require('koa-router')
 const cors = require('koa2-cors');
 
+// 引入子路由
+const childRouter=require('./routes/routes')
+
 // 实例化koa
 const app=new Koa()
 const router=new Router()
 
-router.get('/api/test1',async(ctx)=>{
-  ctx.body={
-    msg:'hello koa',
-    a:ctx.query.m
-  }
-})
+// 加载子路由
+router.use('/api',childRouter.routes(),childRouter.allowedMethods())
+
+
 // 允许跨域访问
 app.use(cors({
   origin: function (ctx) {
@@ -24,7 +25,7 @@ app.use(cors({
   exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
   maxAge: 5,
   credentials: true,
-  allowMethods: ['GET', 'POST', 'DELETE'],
+  allowMethods: ['GET', 'POST', 'DELETE','PUT'],
   allowHeaders: ['Content-Type', 'Authorization', 'Accept']
 }))
 
