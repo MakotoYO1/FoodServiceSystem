@@ -12,7 +12,8 @@ mongoose.connection.on('error',function(err){
 
 mongoose.connect('mongodb://localhost/test',{
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify:false
 })
 
 const memberSchema=require('./models/member')

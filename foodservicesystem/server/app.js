@@ -29,6 +29,30 @@ app.use(cors({
   allowHeaders: ['Content-Type', 'Authorization', 'Accept']
 }))
 
+// 获取post传递的数据
+app.use(async (ctx,next)=>{
+  if(ctx.method==='POST'||ctx.method==='DELETE'||ctx.method==='PUT'){
+    let passData=await parsePostData(ctx)
+    ctx.body=passData
+  }
+  await next()
+})
+function parsePostData(ctx){ 
+  return new Promise((resolve,reject)=>{ 
+        try{ 
+             let postdata=""; 
+             ctx.req.on('data',(data)=>{ 
+                  postdata+=data 
+             }) 
+             ctx.req.on("end",function(){ 
+                  resolve(postdata); 
+             }) 
+        }catch(error){ 
+             reject(error); 
+        } 
+  }); 
+} 
+
 // 配置路由
 app.use(router.routes(),router.allowedMethods())
 
