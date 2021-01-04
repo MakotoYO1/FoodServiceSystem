@@ -17,9 +17,17 @@ mongoose.connect('mongodb://localhost/test',{
 })
 
 const memberSchema=require('./models/member')
+const staffSchema=require('./models/staff')
+const seatSchema=require('./models/seat')
+const dishSchema=require('./models/dish')
+const billSchema=require('./models/bill')
 
 const models={
-  Member:memberSchema
+  Member:memberSchema,
+  Staff:staffSchema,
+  Seat:seatSchema,
+  Dish:dishSchema,
+  Bill:billSchema
 }
 
 module.exports=models
