@@ -17,7 +17,16 @@ const billList=mongoose.Schema({
       showId:String,
       name:String,
       price:Number,
-      count:Number
+      count:Number,
+      _id: {
+        type: mongoose.Types.ObjectId, 
+        select: false,
+        default:mongoose.Types.ObjectId
+      },
+      __v: {
+        type: Number,
+        select: false
+      }
     }
   ],
   // 消费总金额

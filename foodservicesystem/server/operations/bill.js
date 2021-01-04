@@ -3,11 +3,11 @@ const billList = require('../db/db').Bill
 // 增加
 const addBill = async ctx=>{
   let {showId=null,showId_t=null,showId_s=null,dishInfo=[],cost_total=null}=JSON.parse(ctx.body)
-  let bill=new BillList({
+  let bill=new billList({
     showId,showId_t,showId_s,dishInfo,cost_total
   })
   await new Promise((resolve,reject)=>{
-    BillList.find({showId},(err,res)=>{
+    billList.find({showId},(err,res)=>{
       if(err){
         ctx.body={
           code:-1,
@@ -53,7 +53,7 @@ const findBill=async ctx=>{
     }
   }
   await new Promise((resolve,reject)=>{
-    BillList.find(params,(err,res)=>{
+    billList.find(params,(err,res)=>{
       if(err){
         ctx.body={
           code:-1,
@@ -75,7 +75,7 @@ const findBill=async ctx=>{
 const removeBill=async ctx=>{
   let billId=JSON.parse(ctx.body).id
   await new Promise((resolve,reject)=>{
-    BillList.findOneAndRemove({billId},(err,res)=>{
+    billList.findOneAndRemove({billId},(err,res)=>{
       if(err){
         ctx.body={
           code:-1,
@@ -98,7 +98,7 @@ const updateBill=async ctx=>{
   let billId=data.id
   delete data.id
   await new Promise((resolve,reject)=>{
-    BillList.findOneAndUpdate({billId},data,(err,res)=>{
+    billList.findOneAndUpdate({billId},data,(err,res)=>{
       if(err){
         ctx.body={
           code:-1,

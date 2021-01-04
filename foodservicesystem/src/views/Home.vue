@@ -14,6 +14,7 @@ import test from '@/api/member.js'
 import teststaff from '@/api/staff.js'
 import testSeat from '@/api/seat.js'
 import testDish from '@/api/dish.js'
+import testBill from '@/api/bill.js'
 
 export default {
   name: 'Home',
@@ -77,6 +78,25 @@ export default {
     //     let res1=await testDish.search()
     // console.log(res1)
     // let res2=await testDish.remove('5ff2d0d8d2c11e09509f2af2')
+    let res=await testBill.add({
+      showId:'001',
+      showId_t:'001',
+      showId_s:'002',
+      dishInfo:[
+        {
+          showId:'001',
+          name:'tangcu',
+          price:12,
+          count:2
+        }
+      ]
+    })
+    let res2=await testBill.update('5ff33445c110d82f14f57e3e',{
+      showId_t:'002'
+    })
+    let res3=await testBill.remove('5ff33445c110d82f14f57e3e')
+    let res1=await testBill.search()
+
   }
 }
 </script>
