@@ -4,6 +4,9 @@ import router from './router'
 import store from './store'
 import ELEMENT from 'element-ui'
 import '@/assets/css/element-variables.scss'
+import '@/assets/css/global.scss'
+import './router/guard'
+
 Vue.use(ELEMENT,{})
 Vue.config.productionTip = false
 
