@@ -6,6 +6,7 @@ const staffOperations=require('../operations/staff')
 const seatOperations=require('../operations/seat')
 const dishOperations=require('../operations/dish')
 const billOperations=require('../operations/bill')
+const userOperations=require('../operations/user')
 
 
 // 会员
@@ -38,5 +39,12 @@ childRouter.post('/bill/add',billOperations.addBill)
 childRouter.get('/bill/get',billOperations.findBill)
 childRouter.delete('/bill/remove',billOperations.removeBill)
 childRouter.put('/bill/update',billOperations.updateBill)
+
+// 用户
+childRouter.post('/user/add',userOperations.addUser)
+childRouter.get('/user/get',userOperations.findUser)
+childRouter.delete('/user/remove',userOperations.removeUser)
+childRouter.put('/user/update/info',userOperations.updateUserInfo)
+childRouter.put('/user/update/records',userOperations.updateUserRecords)
 
 module.exports=childRouter

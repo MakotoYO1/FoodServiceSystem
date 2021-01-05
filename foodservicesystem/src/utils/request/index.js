@@ -27,7 +27,19 @@ service.interceptors.request.use(
  */
 service.interceptors.response.use(
   async response=>{
-    return Promise.resolve(response)
+    if(response.status===200){
+      // -2权限问题禁止访问
+      if(response.data.code===-2){
+        Message.error(response.data.message)
+        return
+      }
+      // -1请求问题
+      if(response.data.code===-1){
+        Message.error(response.data.message)
+        return
+      }
+    }
+    return Promise.resolve(response.data)
   },
   error => {
     if(!error.response){

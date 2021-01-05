@@ -11,7 +11,7 @@ const addMember = async ctx=>{
       if(err){
         ctx.body={
           code:-1,
-          message:'服务器异常'
+          message:'添加失败，服务器异常'
         }
         reject(err)
       }else{
@@ -39,7 +39,7 @@ const findMember=async ctx=>{
       if(err){
         ctx.body={
           code:-1,
-          message:'服务器异常'
+          message:'查找失败，服务器异常'
         }
         reject(err)
         return
@@ -67,7 +67,7 @@ const removeMember=async ctx=>{
       if(err){
         ctx.body={
           code:-1,
-          message:'服务器异常'
+          message:'删除失败，服务器异常'
         }
         reject(err)
         return
@@ -90,7 +90,7 @@ const updateMember=async ctx=>{
       if(err){
         ctx.body={
           code:-1,
-          message:'服务器异常'
+          message:'修改失败，服务器异常'
         }
         reject(err)
         return

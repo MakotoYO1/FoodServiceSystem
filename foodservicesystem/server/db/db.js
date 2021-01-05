@@ -21,13 +21,15 @@ const staffSchema=require('./models/staff')
 const seatSchema=require('./models/seat')
 const dishSchema=require('./models/dish')
 const billSchema=require('./models/bill')
+const userSchema=require('./models/user')
 
 const models={
   Member:memberSchema,
   Staff:staffSchema,
   Seat:seatSchema,
   Dish:dishSchema,
-  Bill:billSchema
+  Bill:billSchema,
+  User:userSchema
 }
 
 module.exports=models

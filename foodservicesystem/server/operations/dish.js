@@ -11,7 +11,7 @@ const addDish = async ctx=>{
       if(err){
         ctx.body={
           code:-1,
-          message:'服务器异常'
+          message:'添加失败，服务器异常'
         }
         reject(err)
         return
@@ -19,7 +19,7 @@ const addDish = async ctx=>{
       if(res.length){
         ctx.body={
           code:-1,
-          message:'编号已存在'
+          message:'添加失败，编号已存在'
         }
         resolve(res)
       }else{
@@ -27,7 +27,7 @@ const addDish = async ctx=>{
           if(err){
             ctx.body={
               code:-1,
-              message:'服务器异常'
+              message:'添加失败，服务器异常'
             }
             reject(err)
           }else{
@@ -57,7 +57,7 @@ const findDish=async ctx=>{
       if(err){
         ctx.body={
           code:-1,
-          message:'服务器异常'
+          message:'查找失败，服务器异常'
         }
         reject(err)
         return
@@ -79,7 +79,7 @@ const removeDish=async ctx=>{
       if(err){
         ctx.body={
           code:-1,
-          message:'服务器异常'
+          message:'删除失败，服务器异常'
         }
         reject(err)
         return
@@ -102,7 +102,7 @@ const updateDish=async ctx=>{
       if(err){
         ctx.body={
           code:-1,
-          message:'服务器异常'
+          message:'修改失败，服务器异常'
         }
         reject(err)
         return

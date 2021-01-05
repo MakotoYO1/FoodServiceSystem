@@ -16,3 +16,18 @@ const memberRateDict={
   5:'钻石',
   6:'王者'
 }
+
+const userRoleDict={
+  1:'管理员',
+  2:'职工'
+}
+
+const staffRoleDict={
+  1:'大堂经理',
+  2:'服务员',
+  3:'收银',
+  4:'传菜员',
+  5:'采购',
+  6:'洗碗工',
+  7:'保洁'
+}
