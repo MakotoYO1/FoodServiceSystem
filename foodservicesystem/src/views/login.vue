@@ -40,7 +40,7 @@
                <div v-show="true" class="err_msg">密码不能为空</div>
               </div>
               <div class="button">
-                <el-button type="primary" class="button">立即登录</el-button>
+                <el-button type="primary" class="button">立即注册</el-button>
               </div>
             </el-tab-pane>
           </el-tabs>
