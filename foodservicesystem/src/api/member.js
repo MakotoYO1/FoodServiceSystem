@@ -12,6 +12,11 @@ export default {
     return http.post('/member/add',params)
   },
   search(params){
+    for(let k in params){
+      if(params[k]===''){
+        delete params[k]
+      }
+    }
     return http.get('/member/get',{
       params
     })

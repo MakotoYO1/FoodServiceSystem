@@ -6,7 +6,7 @@ import ELEMENT from 'element-ui'
 import '@/assets/css/element-variables.scss'
 import '@/assets/css/global.scss'
 import './router/guard'
-
+import './components/'
 Vue.use(ELEMENT,{})
 Vue.config.productionTip = false
 

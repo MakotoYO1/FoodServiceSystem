@@ -31,3 +31,5 @@ const staffRoleDict={
   6:'洗碗工',
   7:'保洁'
 }
+
+export {dishDict,memberRateDict,userRoleDict,staffRoleDict}

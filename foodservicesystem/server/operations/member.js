@@ -46,7 +46,7 @@ const findMember=async ctx=>{
       }
       ctx.body={
         code:0,
-        message:'修改成功'
+        data:res
       }
       resolve(res)
     })
