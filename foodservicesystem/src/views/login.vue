@@ -141,7 +141,7 @@ export default {
             location:returnCitySN['cname']
           })
           this.$store.dispatch('login',{
-            name:data.name,role:data.role
+            name:data.name,role:data.role,id:data.userId
           })
           this.$message.success('登录成功')
           this.$router.push('/app')

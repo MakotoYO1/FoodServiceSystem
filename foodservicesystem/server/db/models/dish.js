@@ -23,7 +23,7 @@ const dishList=mongoose.Schema({
     type:Boolean,
     default:true
   },
-  price:Number,
+  price:String,
   _id: {
     type: mongoose.Types.ObjectId, 
     select: false,

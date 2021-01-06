@@ -32,3 +32,36 @@
   line-height: normal;
   color:#7d91a6;
 }
+.input,.select{
+  width: 200px;
+  margin-right: 5px;
+}
+.small{
+  width: 100px;
+}
+.middle{
+  width: 150px;
+}
+.main{
+  width: 100%;
+  padding: 15px 20px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  .table_search{
+    display: flex;
+    margin-bottom: 15px;
+    .add{
+      margin-left: auto;
+    }
+  }
+  .table_show {
+    width: 100%;
+  }
+}
+// element样式调整
+.el-form-item__error{
+  left: 80px;
+}
+.el-dialog{
+  width: 500px;
+}

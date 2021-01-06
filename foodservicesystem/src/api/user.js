@@ -8,6 +8,11 @@ export default {
     return http.post('/user/add',params)
   },
   search(params){
+    for(let k in params){
+      if(params[k]===null||params[k]===undefined||params[k]===''){
+        delete params[k]
+      }
+    }
     return http.get('/user/get',{
       params
     })

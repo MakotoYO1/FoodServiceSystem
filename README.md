@@ -5,8 +5,8 @@
 | 会员号 | memberId | ObjectId | Y | N  |
 | 姓名 | name | String | | N |
 | 性别 | sex | String | | N | 
-| 电话号码 | phone | String | |  |
-| 生日 | birthday | String | |  | 
+| 电话号码 | phone | String | | N |
+| 生日 | birthday | String | | N | 
 | 会员等级 | rate | Number | | N |
 | 会员积分 | integral | Number | | N | 
 
@@ -17,8 +17,8 @@
 | 编号 | showId | ObjectId | Y | N  |
 | 姓名 | name | String | | N |
 | 性别 | sex | String | | N |
-| 年龄 | age | Number | |  | 
-| 电话号码 | phone | String | |  |
+| 年龄 | age | Number | | N | 
+| 电话号码 | phone | String | | N |
 | 角色 | role | Number | | N | 
 桌台信息：
 | 字段名 | 字段代码 | 字段类型 | 关键字 | 可否为空|
@@ -34,7 +34,7 @@
 | 类型 | type | String | | N |
 | 数量 | count | Number | | N | 
 | 是否供应 | provided | Boolean | | N |
-| 价格 |price | Number | | N | 
+| 价格 |price | String | | N | 
 账单信息:
 | 字段名 | 字段代码 | 字段类型 | 关键字 | 可否为空|
 | :-----:| :-----: | :----: | :---:|:--:|

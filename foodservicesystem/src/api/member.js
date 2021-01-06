@@ -13,7 +13,7 @@ export default {
   },
   search(params){
     for(let k in params){
-      if(params[k]===''){
+      if(params[k]===null||params[k]===undefined||params[k]===''){
         delete params[k]
       }
     }

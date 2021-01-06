@@ -44,7 +44,12 @@ export default {
       }
     },
     routesMenu(){
-      return this.currentRoutes.children.filter(item=>!item.meta.hidden)
+      return this.currentRoutes.children.filter(item=>{
+        if(item.path==='user'&&Number(this.userInfo.role)!==1){
+          return false
+        }
+        return !item.meta.hidden
+      })
     },
     currentPath(){
       return this.$route.path
