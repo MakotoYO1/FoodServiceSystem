@@ -150,8 +150,15 @@ export default {
       this.getTableData()
     },
     async handleDelete(row){
-      let res=await member.remove(row.userId)
+      let userId=row.userId
+      let res=await user.remove(userId)
       if(res.code===0){
+        if(this.currentUser.uid===userId){
+          this.$message.error('信息发生改变，请重新登录')
+          this.$store.dispatch('logout')
+          this.$router.push('/login')
+          return
+        }
         this.$message.success('删除成功')
         this.getTableData()
       }

@@ -103,7 +103,7 @@
               ></el-option>
             </el-select>
         </el-form-item>
-        <el-form-item label="数量" prop="count">
+        <el-form-item label="数量">
           <el-input v-model.number="form.count" class="input" @change="countChange"></el-input>
         </el-form-item>
         <el-form-item label="是否供应">
@@ -164,9 +164,6 @@ export default {
         ],
         type:[
           {required:true,message:'请选择类型',trigger:'change'}
-        ],
-        count:[
-          {type:'integer',required:true,message:'数量必须为整数',trigger:'blur'}
         ],
         price:[
           {required:true,message:'请输入价格',trigger:'blur'}

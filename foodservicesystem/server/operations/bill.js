@@ -19,7 +19,7 @@ const addBill = async ctx=>{
       if(res.length){
         ctx.body={
           code:-1,
-          message:'添加失败，编号已存在'
+          message:'添加失败，账单编号已存在'
         }
         resolve(res)
       }else{
