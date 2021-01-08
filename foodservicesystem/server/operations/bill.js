@@ -2,9 +2,9 @@ const billList = require('../db/db').Bill
 
 // 增加
 const addBill = async ctx=>{
-  let {showId=null,showId_t=null,showId_s=null,dishInfo=[],cost_total=null}=JSON.parse(ctx.body)
+  let {showId=null,showId_t=null,showId_s=null,dishInfo=[],cost_total=null,created_time=null}=JSON.parse(ctx.body)
   let bill=new billList({
-    showId,showId_t,showId_s,dishInfo,cost_total
+    showId,showId_t,showId_s,dishInfo,cost_total,created_time
   })
   await new Promise((resolve,reject)=>{
     billList.find({showId},(err,res)=>{
@@ -45,8 +45,8 @@ const addBill = async ctx=>{
 
 // 查找
 const findBill=async ctx=>{
-  let {showId=null,showId_t=null,showId_s=null,cost_total=null}=ctx.query
-  let params={showId,showId_t,showId_s,cost_total}
+  let {showId=null,showId_t=null,showId_s=null,cost_total=null,created_time=null}=ctx.query
+  let params={showId,showId_t,showId_s,cost_total,created_time}
   for(let k in params){
     if(params[k]===null){
       delete params[k]

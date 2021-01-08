@@ -31,6 +31,8 @@ const billList=mongoose.Schema({
   ],
   // 消费总金额
   cost_total:Number,
+  // 立账时间
+  created_time:String,
   _id: {
     type: mongoose.Types.ObjectId, 
     select: false,

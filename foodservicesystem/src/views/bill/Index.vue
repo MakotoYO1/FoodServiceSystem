@@ -19,12 +19,25 @@
         class="input"
         clearable
       ></el-input>
+      <el-date-picker
+        placeholder="请选择立账时间"
+        v-model="filter.created_time"
+        clearable
+        value-format="yyyy-MM-dd"
+        class="select middle">
+      </el-date-picker>
       <el-button type="primary" icon="el-icon-search" @click="search">搜索</el-button>
+      <span style="padding-top:10px;">当前总金额：<span class="price">{{'￥:'+totalPrice}}</span></span>
       <el-button class="add" type="primary" icon="el-icon-circle-plus-outline" @click="addBill">新增账单</el-button>
     </div>
     <div class="table_show">
       <el-table :data="tableData" v-loading="loading">
         <el-table-column label="账单编号" prop="showId" align="center"></el-table-column>
+        <el-table-column label="立账时间"  align="center">
+          <template slot-scope="scope">
+            {{scope.row.created_time}}
+          </template>
+        </el-table-column>
         <el-table-column label="桌台编号" prop="showId_t" align="center"></el-table-column>
         <el-table-column label="服务人员编号" prop="showId_s" align="center"></el-table-column>
         <el-table-column label="消费总金额" align="center" prop="cost_total"></el-table-column>
@@ -90,6 +103,16 @@
               </el-option>
             </el-select>
         </el-form-item>
+        <el-form-item label="立账时间" prop="created_time">
+          <el-date-picker
+            v-model="form.created_time"
+            placeholder="请选择"
+            clearable
+            value-format="yyyy-MM-dd"
+            :disabled="dialogType==='check'"
+            class="select middle">
+          </el-date-picker>
+        </el-form-item>
       </el-form>
       <div class="dishinfo" >
         <div v-show="dialogType!=='check'">
@@ -154,7 +177,8 @@ export default {
       filter:{
         showId:'',
         showId_t:'',
-        showId_s:''
+        showId_s:'',
+        created_time:''
       },
       seatTypeDict:{
         'small':'小桌',
@@ -177,7 +201,8 @@ export default {
         showId:'',
         showId_t:'',
         showId_s:'',
-        cost_total:''
+        cost_total:'',
+        created_time:''
       },
       currentDish:{
         showId:'',
@@ -193,10 +218,20 @@ export default {
         showId_t:[
           {required:true,message:'请选择桌台编号',trigger:'change'}
         ],
+        created_time:[
+          {required:true,message:'请选择立账时间',trigger:'change'}
+        ],
         showId_s:[
           {required:true,message:'请选择服务人员编号',trigger:'change'}
         ]
       }
+    }
+  },
+  computed:{
+    totalPrice(){
+      return this.tableData.reduce((pre,cur)=>{
+        return pre+Number(cur.cost_total)
+      },0)
     }
   },
   created(){
@@ -238,7 +273,7 @@ export default {
           dict[cur.showId]=cur
           return dict
       },{})
-      console.log(this.dishOptionsDict)
+      // console.log(this.dishOptionsDict)
       }
     },
     async getTableData(){
@@ -314,6 +349,7 @@ export default {
         this.$message.error('至少添加一个菜品')
         return false
       }
+      console.log(this.form)
       let params=JSON.parse(JSON.stringify(this.form))
       params.dishInfo=this.dishInfo
       if(this.dialogType==='add'){
@@ -365,6 +401,10 @@ export default {
 /deep/ .el-form-item__error{
   left: 120px !important;
 }
+.price{
+  font-weight: 550;
+  color:red;
+}
 .dishinfo {
   .title{
     margin-bottom: 10px;
@@ -393,22 +433,12 @@ export default {
       .calc{
         color:#777777;
       }
-      .price{
-        font-weight: 550;
-        color:red;
-      }
       .dish{
         font-weight: 550;
       }
     }
     .content:last-child{
       margin-bottom: 20px;
-    }
-  }
-  .cost_total{
-    .price{
-      font-weight: 550;
-      color:red;
     }
   }
 }

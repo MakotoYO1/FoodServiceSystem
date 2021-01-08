@@ -43,6 +43,7 @@
 | :-----:| :-----: | :----: | :---:|:--:|
 | 编号 | showId | ObjectId | Y | N  |
 | 桌台编号 | showId_t | String | | N |
+| 立账时间 | created_time | String | |  |
 | 服务人员编号 | showId_s | String | | N |
 | 菜品消费信息 | dishInfo | Array | |  | 
 | 服务总金额 | cost_total | Number | |  |
