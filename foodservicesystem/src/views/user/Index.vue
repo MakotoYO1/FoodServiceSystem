@@ -21,6 +21,7 @@
         ></el-option>
       </el-select>
       <el-button type="primary" icon="el-icon-search" @click="search">搜索</el-button>
+      <el-button class="add" type="primary" icon="el-icon-circle-plus-outline" @click="addUser">新增用户</el-button>
     </div>
     <div class="table_show">
       <el-table :data="tableData" v-loading="loading">
@@ -64,7 +65,7 @@
     <!-- form -->
     <el-dialog :title="dialogTitle"  :visible.sync="dialogFormVisible" :close-on-click-modal="false" center>
       <el-form :model="form" :rules="rules" ref="ruleForm">
-        <el-form-item label="姓名" prop="name">
+        <el-form-item label="用户名" prop="name">
           <el-input v-model="form.name" class="input"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="pwd">
@@ -110,7 +111,8 @@ export default {
       userRoleDict,
       tableData:[],
       dialogFormVisible:false,
-      dialogTitle:'编辑用户',
+      dialogType:'add',
+      dialogTitle:'新增用户',
       form:{
         userId:'',
         name:'',
@@ -163,7 +165,20 @@ export default {
         this.getTableData()
       }
     },
+    initForm(){
+      for(let k in this.form){
+          this.form[k]=''
+      }
+    },
+    addUser(row){
+      this.dialogType='add'
+      this.dialogTitle='新增用户'
+      this.initForm()
+      this.dialogFormVisible=true
+    },
     editUser(row){
+      this.dialogType='edit'
+      this.dialogTitle='编辑用户'
       this.dialogFormVisible=true
       for(let k in this.form){
         this.form[k]=row[k]
@@ -179,17 +194,30 @@ export default {
       if(!judge){
         return false
       }
-      let res=await user.updateInfo(this.form.userId,this.form)
-      if(res.code===0){
-        if(this.currentUser.uid===this.form.userId){
-          this.$message.error('信息发生改变，请重新登录')
-          this.$store.dispatch('logout')
-          this.$router.push('/login')
-          return
+      if(this.dialogType==='add'){
+        let res=await user.add({...this.form,records:[{
+            ip:returnCitySN['cip'],
+            location:returnCitySN['cname']
+          }]
+        })
+        if(res.code===0){
+          this.$message.success('添加成功')
+          this.dialogFormVisible=false
+          this.getTableData()
         }
-        this.$message.success('编辑成功')
-        this.dialogFormVisible=false
-        this.getTableData()
+      }else{
+        let res=await user.updateInfo(this.form.userId,this.form)
+        if(res.code===0){
+          if(this.currentUser.uid===this.form.userId){
+            this.$message.error('信息发生改变，请重新登录')
+            this.$store.dispatch('logout')
+            this.$router.push('/login')
+            return
+          }
+          this.$message.success('编辑成功')
+          this.dialogFormVisible=false
+          this.getTableData()
+        }
       }
     },
     showPwd(row){

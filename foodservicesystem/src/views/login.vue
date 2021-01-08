@@ -41,7 +41,8 @@
                 >
               </div>
             </el-tab-pane>
-            <el-tab-pane label="注册" name="register">
+            <!-- 注册功能不需要改成超级管理员创建账号 -->
+            <!-- <el-tab-pane label="注册" name="register">
               <div class="login_info">
                 <el-input
                   @focus="register_nj = false"
@@ -77,7 +78,7 @@
               <div class="button">
                 <el-button @click="registerUser" type="primary" class="button">立即注册</el-button>
               </div>
-            </el-tab-pane>
+            </el-tab-pane> -->
           </el-tabs>
         </div>
       </div>

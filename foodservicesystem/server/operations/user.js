@@ -1,5 +1,27 @@
 const UserList = require('../db/db').User
 
+
+// 预先构建超级管理员账号，其他账号需管理员身份登录后自行去用户管理中添加
+UserList.find({name:'admin'},(err,res)=>{
+    if(err){
+      console.log('添加失败，服务器异常')
+      return
+    }
+    if(res.length){
+      console.log('超级管理员已存在，name:admin,pwd:123')
+    }else{
+      new UserList({name:'admin',pwd:'123',role:1,records:[]}).save((err,res)=>{
+        if(err){
+          console.log(err)
+        }else{
+          console.log('超级管理员建立成功,name:admin,pwd:123')
+        }
+      })
+    }
+  }
+)
+
+
 // 增加
 const addUser = async ctx=>{
   let {name=null,pwd=null,role=2,records=[]}=JSON.parse(ctx.body)
